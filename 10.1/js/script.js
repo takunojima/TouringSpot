@@ -1,22 +1,18 @@
-window.addEventListener('load', function () {
-    var $button = this.document.querySelector('.toggle-menu-button');
-    var $menu = this.document.querySelector('.header-site-menu');
+document.addEventListener('DOMContentLoaded', function () {
+    const toggleMenuButton = document.querySelector('.toggle-menu-button');
+    const headerSiteMenu = document.querySelector('.header-site-menu');
 
-    $button.addEventListener('click', function () {
-        if ($menu.classList.contains('is-show')) {
-            $menu.classList.remove('is-show');
-        }
-        else {
-            $menu.classList.add('is-show');
-        }
+    toggleMenuButton.addEventListener('click', function () {
+        headerSiteMenu.classList.toggle('is-show');
     });
-});
 
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
 
-$(function () {
-    $(window).scroll(function () {
-        $("nav.floating").stop().animate(
-            {"top": $(window).scrollTop() + 100},
-        500);
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
     });
 });
